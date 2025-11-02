@@ -1,4 +1,4 @@
-// Since this a test, just copied entire thing from docs
+// List server details
 const {SlashCommandBuilder} = require('discord.js')
 
 module.exports = {
