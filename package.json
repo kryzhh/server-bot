@@ -1,0 +1,25 @@
+{
+  "name": "server-bot",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/kryzhh/server-bot#readme",
+  "bugs": {
+    "url": "https://github.com/kryzhh/server-bot/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kryzhh/server-bot.git"
+  },
+  "license": "MIT",
+  "author": "kryzhh",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "dependencies": {
+    "discord.js": "^14.24.2",
+    "dotenv": "^17.2.3",
+    "gamedig": "^5.3.2"
+  }
+}
