@@ -9,7 +9,7 @@ module.exports = {
 		try {
 			const state = await GameDig.query({
 				type: "minecraft",
-				host: "192.168.59.136"
+				host: "127.0.0.1"
 			});
             const names = state.players.length
             ? state.players.map(p => p.name).join(', ')
