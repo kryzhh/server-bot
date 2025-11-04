@@ -6,7 +6,7 @@ require('dotenv').config();
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName('shutdown')
+    .setName('pc-shutdown')
     .setDescription('Shuts down the server (authorized users only)'),
 
   async execute(interaction) {
