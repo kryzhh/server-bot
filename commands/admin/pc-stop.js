@@ -7,7 +7,7 @@ require('dotenv').config();
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('pc-shutdown')
-    .setDescription('Shuts down the server (authorized users only)'),
+    .setDescription('Shuts down the PC (authorized users only)'),
 
   async execute(interaction) {
     const allowedUsers = process.env.ALLOWED_USERS.split(',');
