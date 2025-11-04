@@ -1,9 +1,9 @@
-// Use gamedig to see players alive
+// Use gamedig to see who is online
 const {SlashCommandBuilder} = require('discord.js')
 const { GameDig } = require('gamedig')
 
 module.exports = {
-	data: new SlashCommandBuilder().setName('players').setDescription('See who is online right now'),
+	data: new SlashCommandBuilder().setName('players').setDescription('See who is online'),
 	async execute(interaction) {
 		await interaction.deferReply();
 		try {
@@ -11,7 +11,11 @@ module.exports = {
 				type: "minecraft",
 				host: "127.0.0.1"
 			});
-			await interaction.editReply(`**Total Online Players:** ${state.players.length}/${state.maxplayers}`)
+            const names = state.players.length
+            ? state.players.map(p => p.name).join(', ')
+            : 'No players online';
+
+			await interaction.editReply(`**Online Players:** ${names}`)
 		}
         catch(error){
             console.log(error)
