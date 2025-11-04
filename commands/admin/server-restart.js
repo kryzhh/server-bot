@@ -4,7 +4,7 @@ require('dotenv').config();
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName('serverrestart')
+    .setName('server-restart')
     .setDescription('Restarts the Minecraft server (authorized users only)'),
 
   async execute(interaction) {
@@ -60,7 +60,7 @@ module.exports = {
           // Wait a bit before restarting
           setTimeout(() => {
             exec(
-              'tmux new-session -d -s minecraft "cd ~/minecraft && java -Xmx4G -Xms2G -jar server.jar nogui"',
+              'tmux new-session -d -s minecraft "java -Xms1G -Xms2G -jar server.jar nogui"',
               (err2) => {
                 if (err2) {
                   console.error('Start error:', err2);
