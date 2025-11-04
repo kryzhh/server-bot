@@ -5,11 +5,27 @@ const { Client, Collection, Events, GatewayIntentBits, MessageFlags } = require(
 const fs = require('node:fs');
 const path = require('node:path');
 
+// To launch server
+const { exec } = require('child_process')
+
 // Could have used config.json but ehhhhhhhhhh
 require('dotenv').config()
 
 // Copy pasted this from discord.js docs (Creates the client)
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+
+// Launching mcserver
+exec('tmux new-session -d -s minecraft "java -Xms1G -Xms2G -jar server.jar nogui"', (error, stdout, stderr) => {
+  if (error) {
+    console.error(`Error: ${error.message}`)
+    return
+  }
+  if (stderr) {
+    console.error(`stderr: ${stderr}`)
+    return
+  }
+  console.log('Started Minecraft Server')
+});
 
 // BOT, ACTIVATEEEEEEE
 client.once(Events.ClientReady, (readyClient) => {
