@@ -1,17 +1,18 @@
 // Shutdown command, only people in ALLOWED_USERS in env file can use it
 const { SlashCommandBuilder } = require('discord.js');
-const { exec } = require('child_process'); // for tmux command execution
+const { exec } = require('child_process'); // for tmux control
 const dbus = require('dbus-next');
 require('dotenv').config();
 
 module.exports = {
-  data: new SlashCommandBuilder().setName('pc-shutdown').setDescription('Shuts down the server (authorized users only)'),
+  data: new SlashCommandBuilder()
+    .setName('shutdown')
+    .setDescription('Shuts down the server (authorized users only)'),
 
   async execute(interaction) {
     const allowedUsers = process.env.ALLOWED_USERS.split(',');
     const userId = interaction.user.id;
 
-    // Permission check
     if (!allowedUsers.includes(userId)) {
       return interaction.reply({
         content: 'You are not authorized to shut down this server.',
@@ -24,11 +25,9 @@ module.exports = {
       ephemeral: true,
     });
 
-    // Step 1: Gracefully stop Minecraft server inside tmux
     try {
       await new Promise((resolve, reject) => {
         exec(
-          // Send "stop" command to the tmux session
           `tmux send-keys -t minecraft "say Server shutting down in 10 seconds..." C-m && sleep 3 && tmux send-keys -t minecraft "stop" C-m`,
           (error, stdout, stderr) => {
             if (error) {
@@ -40,7 +39,6 @@ module.exports = {
         );
       });
 
-      // Wait a few seconds for Minecraft to safely stop
       await new Promise((r) => setTimeout(r, 7000));
 
       await interaction.followUp({
@@ -54,7 +52,6 @@ module.exports = {
       });
     }
 
-    // Step 2: Power off the system via D-Bus
     try {
       const bus = dbus.systemBus();
       const proxy = await bus.getProxyObject(
@@ -63,7 +60,8 @@ module.exports = {
       );
 
       const manager = proxy.getInterface('org.freedesktop.login1.Manager');
-      await manager.CallMethod('PowerOff', true);
+
+      await manager.PowerOff(true); 
 
       await interaction.followUp({
         content: '💤 System is shutting down now...',
