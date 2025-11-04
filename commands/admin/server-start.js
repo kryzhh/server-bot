@@ -33,7 +33,7 @@ module.exports = {
 
       // Start the server inside tmux session
       exec(
-        'tmux new-session -d -s minecraft "cd ~/minecraft && java -Xmx4G -Xms2G -jar server.jar nogui"',
+        'tmux new-session -d -s minecraft "java -Xms1G -Xms2G -jar server.jar nogui"',
         (err, stdout, stderr) => {
           if (err) {
             console.error('Start error:', stderr);

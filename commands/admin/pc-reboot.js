@@ -7,7 +7,7 @@ require('dotenv').config();
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('pc-reboot')
-    .setDescription('Reboots the server (authorized users only)'),
+    .setDescription('Reboots the PC (authorized users only)'),
 
   async execute(interaction) {
     const allowedUsers = process.env.ALLOWED_USERS.split(',');
