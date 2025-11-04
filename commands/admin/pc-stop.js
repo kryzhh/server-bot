@@ -64,7 +64,7 @@ module.exports = {
       await manager.PowerOff(true); 
 
       await interaction.followUp({
-        content: '💤 System is shutting down now...',
+        content: 'System is shutting down now...',
       });
     } catch (err) {
       console.error('DBus error:', err);
