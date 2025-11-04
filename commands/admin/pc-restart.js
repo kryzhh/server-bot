@@ -6,7 +6,7 @@ require('dotenv').config();
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName('reboot')
+    .setName('pc-reboot')
     .setDescription('Reboots the server (authorized users only)'),
 
   async execute(interaction) {
