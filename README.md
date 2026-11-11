@@ -15,11 +15,6 @@ This makes it straightforward to extend beyond its current Minecraft use case. W
 
 Role-based access control is handled via an environment-configured allowlist (`ALLOWED_USERS`), so privileged commands are gated without hardcoding user IDs into the codebase.
 
-## Current Commands
-
-- `pc-reboot` — Gracefully stops the Minecraft server, then triggers a system reboot via DBus (authorized users only)
-- `players` — Queries the Minecraft server via GameDig and returns currently online players
-
 ## To Do
 - Add battery check every 5 mins — if power is lost, stop server and wait until power is restored before restarting
 
